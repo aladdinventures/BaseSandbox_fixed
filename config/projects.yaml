@@ -1,0 +1,106 @@
+
+projects:
+  - name: backend
+    path: apps/backend
+    build: "pip install -r requirements.txt"
+    test: "pytest"
+    # Removed start and health_check for local CI/CD testing as they require a persistent running server
+    deploy:
+      - environment: Test
+        render_service_id: "backend-test-service-id"
+      - environment: Staging
+        render_service_id: "backend-staging-service-id"
+      - environment: Production
+        render_service_id: "backend-production-service-id"
+
+  - name: frontend
+    path: apps/frontend
+    build: "npm install && npm run build"
+    test: "npm test"
+    # Removed start and health_check for local CI/CD testing as they require a persistent running server
+    deploy:
+      - environment: Test
+        render_service_id: "frontend-test-service-id"
+      - environment: Staging
+        render_service_id: "frontend-staging-service-id"
+      - environment: Production
+        render_service_id: "frontend-production-service-id"
+
+  - name: integrations
+    path: apps/integrations
+    build: "pip install -r requirements.txt"
+    test: "echo \"No automated tests for integrations\""
+    # No start/health_check for this example, assuming it's a script/agent
+    deploy:
+      - environment: Test
+        render_service_id: "integrations-test-service-id"
+      - environment: Staging
+        render_service_id: "integrations-staging-service-id"
+      - environment: Production
+        render_service_id: "integrations-production-service-id"
+
+  - name: gpt_agent
+    path: apps/gpt_agent
+    build: "echo \"No build step for GPT agent config\""
+    test: "echo \"No automated tests for GPT agent config\""
+    # No start/health_check for this example
+    deploy:
+      - environment: Test
+        render_service_id: "gpt-agent-test-service-id"
+      - environment: Staging
+        render_service_id: "gpt-agent-staging-service-id"
+      - environment: Production
+        render_service_id: "gpt-agent-production-service-id"
+
+  - name: youtube_automation
+    path: apps/youtube_automation
+    build: "pip install -r requirements.txt"
+    test: "pytest"
+    # No start/health_check for this example
+    deploy:
+      - environment: Test
+        render_service_id: "youtube-automation-test-service-id"
+      - environment: Staging
+        render_service_id: "youtube-automation-staging-service-id"
+      - environment: Production
+        render_service_id: "youtube-automation-production-service-id"
+
+  - name: ai_newsbot
+    path: apps/ai_newsbot
+    build: "pip install -r requirements.txt"
+    test: "pytest"
+    # No start/health_check for this example
+    deploy:
+      - environment: Test
+        render_service_id: "ai-newsbot-test-service-id"
+      - environment: Staging
+        render_service_id: "ai-newsbot-staging-service-id"
+      - environment: Production
+        render_service_id: "ai-newsbot-production-service-id"
+
+  - name: mamos-dashboard
+    path: apps/mamos-dashboard
+    build: "npm install && npm run build"
+    test: "npm test"
+    # Removed start and health_check for local CI/CD testing as they require a persistent running server
+    deploy:
+      - environment: Test
+        render_service_id: "mamos-dashboard-test-service-id"
+      - environment: Staging
+        render_service_id: "mamos-dashboard-staging-service-id"
+      - environment: Production
+        render_service_id: "mamos-dashboard-production-service-id"
+
+  - name: mamos-orchestrator
+    path: apps/mamos-orchestrator
+    build: "npm install && npm run build"
+    test: "npm test"
+    # Removed start and health_check for local CI/CD testing as they require a persistent running server
+    deploy:
+      - environment: Test
+        render_service_id: "mamos-orchestrator-test-service-id"
+      - environment: Staging
+        render_service_id: "mamos-orchestrator-staging-service-id"
+      - environment: Production
+        render_service_id: "mamos-orchestrator-production-service-id"
+
